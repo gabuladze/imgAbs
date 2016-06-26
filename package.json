@@ -1,0 +1,30 @@
+{
+  "name": "imageabs",
+  "version": "0.0.1",
+  "description": "Image Search Abstraction Microservice API (Free Code Camp Project)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabuladze/imgAbs.git"
+  },
+  "keywords": [
+    "image",
+    "abstraction",
+    "search",
+    "fcc"
+  ],
+  "author": "Giorgi Abuladze",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabuladze/imgAbs/issues"
+  },
+  "homepage": "https://github.com/gabuladze/imgAbs#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "flickrapi": "^0.4.2"
+  }
+}
