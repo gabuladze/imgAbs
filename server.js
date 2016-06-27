@@ -1,11 +1,11 @@
 'use strict';
 
 var express = require('express');
-var api = require('./app/api/api.js');
-var routes = require('./app/routes/index.js');
-var mongodb = require('mongodb').MongoClient;
 var app = express();
+var mongodb = require('mongodb').MongoClient;
 var dbUrl = process.env.MONGOLAB_URI || "mongodb://localhost/imgabs"
+
+var routes = require('./app/routes/routes.js');
 
 mongodb.connect(dbUrl, function(err, db) {
   if (err) {
@@ -20,8 +20,7 @@ mongodb.connect(dbUrl, function(err, db) {
     max: 50
   });
 
-  routes(app, db);
-  api(app, db);
+  app.use(routes);
 
   var port = process.env.PORT || 3500;
   app.listen(port, function() {

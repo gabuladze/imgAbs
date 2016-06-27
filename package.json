@@ -25,6 +25,6 @@
   "homepage": "https://github.com/gabuladze/imgAbs#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "flickrapi": "^0.4.2"
+    "mongodb": "^2.1.18"
   }
 }
