@@ -13,7 +13,7 @@ var querySchema = mongoose.Schema({
 var Query = mongoose.model('Query', querySchema);
 
 exports.get = function(callback) {
-  Query.find({}, { _id: 0 }, function(err, result) {
+  Query.find({}, { _id: 0, __v: 0 }, function(err, result) {
     if (err) throw err;
     if(result) {
       callback(null, result);
