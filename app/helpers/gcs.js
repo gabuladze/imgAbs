@@ -36,12 +36,14 @@ function format(rawData) {
   var result = [];
   var data = JSON.parse(rawData);
   data.items.forEach(function(item) {
-    var image = {
-      "url": item["pagemap"]["imageobject"][0]["url"],
-      "snippet": item["snippet"],
-      "thumbnail": item["pagemap"]["cse_thumbnail"][0]["src"]
-    };
-    result.push(image);
+    if(item["pagemap"].hasOwnProperty("imageobject")) {
+      var image = {
+        "url": item["pagemap"]["imageobject"][0]["url"],
+        "snippet": item["snippet"],
+        "thumbnail": item["pagemap"]["cse_thumbnail"][0]["src"]
+      };
+      result.push(image);
+    }
   });
 
   return result;
