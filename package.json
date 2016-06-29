@@ -1,6 +1,6 @@
 {
   "name": "imageabs",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Image Search Abstraction Microservice API (Free Code Camp Project)",
   "main": "server.js",
   "scripts": {
