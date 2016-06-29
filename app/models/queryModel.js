@@ -1,8 +1,19 @@
 'use strict';
 
-exports.get = function(db, callback) {
-  var collection = db.collection("queries");
-  collection.find({}, { _id: 0 }, function(err, result) {
+var mongoose = require('mongoose');
+var dbUrl = process.env.MONGOLAB_URI || "mongodb://localhost/imgabs"
+
+mongoose.connect(dbUrl);
+
+var querySchema = mongoose.Schema({
+  term: String,
+  date: { type: Date, default: Date.now }
+});
+
+var Query = mongoose.model('Query', querySchema);
+
+exports.get = function(callback) {
+  Query.find({}, { _id: 0 }, function(err, result) {
     if (err) throw err;
     if(result) {
       callback(null, result);
@@ -10,14 +21,8 @@ exports.get = function(db, callback) {
   }).limit(10);
 }
 
-exports.save = function(term, db, callback) {
+exports.save = function(term, callback) {
   if(term.length === 0) throw new Error("Invalid Search Term!");
-
-  var date = Date.now();
-  var query = {
-    "term": term,
-    "when": date
-  };
-  var collection = db.collection("queries");
-  collection.insertOne(query, callback(err, result));
+  var query = new Query({ term: term });
+  query.save(callback);
 }

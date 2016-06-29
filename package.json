@@ -25,6 +25,7 @@
   "homepage": "https://github.com/gabuladze/imgAbs#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "mongodb": "^2.1.18"
+    "mongodb": "^2.1.18",
+    "mongoose": "^4.5.2"
   }
 }
