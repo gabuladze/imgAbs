@@ -7,17 +7,17 @@ var baseUrl = "https://www.googleapis.com/customsearch/v1?key="+
   +"&fields=items(snippet,pagemap(cse_thumbnail/src,imageobject/url))&cx="+
   process.env.ENGINE_ID
   +"&q=";
-//OFFSET
+
 exports.fetch = function(term, offset, callback) {
   if (term.length < 1) {
     var err = new Error("Invalid Search Term!");
     callback(err, null);
   }
 
-  search(term, callback);
+  search(term, offset, callback);
 }
 
-function search(term, callback) {
+function search(term, offset, callback) {
   var url = baseUrl + term;
   https.get(url, function(res) {
     var body = "";
@@ -26,16 +26,16 @@ function search(term, callback) {
       body += d;
     });
     res.on("end", function() {
-      var result = format(body);
+      var result = format(body, offset);
       callback(null, result);
     })
   });
 }
 
-function format(rawData) {
+function format(rawData, offset) {
   var result = [];
-  var data = JSON.parse(rawData);
-  data.items.forEach(function(item) {
+  var data = offset ? JSON.parse(rawData).items.slice(0,offset) : JSON.parse(rawData).items;
+  data.forEach(function(item) {
     if(item["pagemap"].hasOwnProperty("imageobject")) {
       var image = {
         "url": item["pagemap"]["imageobject"][0]["url"],
