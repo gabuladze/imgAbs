@@ -17,7 +17,7 @@ exports.searchImage = function(req, res) {
 
   Gcs.fetch(term, offset, function(err, result) {
     if (err) throw err;
-    res.send(result);
+    res.json(result);
   });
 };
 
